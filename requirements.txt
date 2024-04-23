@@ -3,4 +3,4 @@ Gunicorn
 tensorflow
 numpy
 keras
-sklearn
+scikit-learn
