@@ -30,7 +30,7 @@ def predict(texts):
 @app.route('/', methods=['POST'])
 def handle_input():
     user_input = request.json.get('input', '')
-    output = doMagic(user_input)  # Implement your magic function here
+    output = predict(user_input)  # Implement your magic function here
     return jsonify({'output': output})
 
 def doMagic(user_input):
