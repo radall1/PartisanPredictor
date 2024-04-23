@@ -6,7 +6,7 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import pickle
 
-with open('/label_encoder.pkl', 'rb') as f:
+with open('label_encoder.pkl', 'rb') as f:
     label_encoder = pickle.load(f)
 with open('tokenizer.json', 'r') as f:
         tokenizer_config = f.read()
