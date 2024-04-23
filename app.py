@@ -21,16 +21,17 @@ def predict(texts):
     model_path = 'political_model_v2.h5'
     model = tf.keras.models.load_model(model_path, compile=False)
     
-    sequences = tokenizer.texts_to_sequences(texts)
-    padded_sequences = pad_sequences(sequences, maxlen=max_sequence_length)
-    predicted_probabilities = model.predict(padded_sequences)
-    predicted_labels = label_encoder.inverse_transform(np.argmax(predicted_probabilities, axis=1))
-    return predicted_labels, np.max(predicted_probabilities, axis=1)
+    sequence = tokenizer.texts_to_sequences([text])
+    padded_sequence = pad_sequences(sequence, maxlen=max_sequence_length)
+    predicted_probabilities = model.predict(padded_sequence)
+    predicted_label_index = np.argmax(predicted_probabilities)
+    predicted_label = label_encoder.classes_[predicted_label_index] if label_encoder else predicted_label_index
+    return predicted_label, predicted_probabilities.max()
 
 @app.route('/', methods=['POST'])
 def handle_input():
     user_input = request.json.get('input', '')
-    output = predict(user_input)  # Implement your magic function here
+    output = str(predict(user_input))  # Implement your magic function here
     return jsonify({'output': output})
 
 def doMagic(user_input):
