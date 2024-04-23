@@ -27,12 +27,50 @@
         .output {
             color: lightgreen;
         }
+        input {
+            background-color: black;
+            color: lightgreen;
+            border: none;
+            outline: none;
+            font-family: monospace;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
-    <div class="terminal">
-        <div class="prompt">></div>
-        <div class="output">{{ message }}</div>
+    <div class="terminal" id="terminal">
+        <div class="output" id="output"></div>
+        <div class="prompt">&gt; <input type="text" id="inputField" onkeydown="handleInput(event)"></div>
     </div>
+
+    <script>
+        function handleInput(event) {
+            if (event.key === "Enter") {
+                var userInput = document.getElementById("inputField").value;
+                document.getElementById("inputField").value = "";
+                addLine("&gt; " + userInput);
+                sendInput(userInput);
+            }
+        }
+
+        function sendInput(userInput) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    addLine(response.output);
+                }
+            };
+            xhr.send(JSON.stringify({input: userInput}));
+        }
+
+        function addLine(text) {
+            var outputDiv = document.getElementById("output");
+            outputDiv.innerHTML += "<div>" + text + "</div>";
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        }
+    </script>
 </body>
 </html>
