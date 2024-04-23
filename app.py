@@ -27,6 +27,9 @@ def predict(texts):
     predicted_labels = label_encoder.inverse_transform(np.argmax(predicted_probabilities, axis=1))
     return predicted_labels, np.max(predicted_probabilities, axis=1)
 
+def predict2(text):
+    return 'lol'
+    
 app = Flask(__name__)
 
 @app.route('/')
@@ -39,7 +42,7 @@ def handle_input():
     if not isinstance(data, list):
         return jsonify({'error': 'Invalid input format'}), 400
 
-    predictions = predict(data)
+    predictions = predict2(data)
     return jsonify({'predictions': predictions.tolist()})
 
 if __name__ == '__main__':
