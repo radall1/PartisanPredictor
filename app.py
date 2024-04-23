@@ -10,7 +10,7 @@ import pickle
 
 app = Flask(__name__)
 
-def predict(texts):
+def predict(text):
     with open('label_encoder.pkl', 'rb') as f:
         label_encoder = pickle.load(f)
     with open('tokenizer.json', 'r') as f:
