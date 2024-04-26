@@ -11,14 +11,14 @@ import pickle
 app = Flask(__name__)
 
 def predict(text):
-    with open('/model/label_encoder.pkl', 'rb') as f:
+    with open('model/label_encoder.pkl', 'rb') as f:
         label_encoder = pickle.load(f)
-    with open('/model/tokenizer.json', 'r') as f:
+    with open('model/tokenizer.json', 'r') as f:
         tokenizer_config = f.read()
     tokenizer = tokenizer_from_json(tokenizer_config)
 
     max_sequence_length = 100 
-    model_path = '/model/political_model_v2.h5'
+    model_path = 'model/political_model_v2.h5'
     model = tf.keras.models.load_model(model_path, compile=False)
     
     sequence = tokenizer.texts_to_sequences([text])
