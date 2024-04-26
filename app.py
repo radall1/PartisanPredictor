@@ -26,18 +26,15 @@ def predict(text):
     predicted_probabilities = model.predict(padded_sequence)
     predicted_label_index = np.argmax(predicted_probabilities)
     predicted_label = label_encoder.classes_[predicted_label_index] if label_encoder else predicted_label_index
-    return predicted_label, predicted_probabilities.max()
+    return predicted_label, int(predicted_probabilities.max()*100)
 
 @app.route('/', methods=['POST'])
 def handle_input():
     user_input = request.json.get('input', '')
-    output = str(predict(user_input))  # Implement your magic function here
+    label, percent = predict(user_input)
+    label = 'Democrat.' if label == 'D' else 'Republican.'
+    output = "I am " + percent + "'%' confident that you're a " + label
     return jsonify({'output': output})
-
-def doMagic(user_input):
-    # Implement your magic function here
-    # For demonstration purposes, echo back the input
-    return "You said: " + user_input
     
 @app.route('/')
 def index():
