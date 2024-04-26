@@ -42,7 +42,7 @@
     <div class="terminal" id="terminal">
         <div class="output">I am a SCOTUS. Ask me any questions</div>
         <div class="output" id="output"></div>
-        <div class="prompt">&gt; <input type="text" id="inputField" onkeydown="handleInput(event)"></div>
+        <div class="prompt">&gt; <input type="text" id="inputField" onkeydown="handleInput(event)" autofocus></div>
     </div>
 
     <script>
@@ -62,7 +62,7 @@
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
-                    addLine(response.output);
+                    addResponse(response.output);
                 }
             };
             xhr.send(JSON.stringify({input: userInput}));
@@ -70,7 +70,13 @@
 
         function addLine(text) {
             var outputDiv = document.getElementById("output");
-            outputDiv.innerHTML += "<div>" + text + "</div>";
+            outputDiv.innerHTML += "<div class='userInput'>" + text + "</div>";
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        }
+
+        function addResponse(text) {
+            var outputDiv = document.getElementById("output");
+            outputDiv.innerHTML += "<div class='response'>" + text + "</div>";
             outputDiv.scrollTop = outputDiv.scrollHeight;
         }
     </script>
