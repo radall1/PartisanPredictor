@@ -26,7 +26,7 @@ def predict(text):
     predicted_probabilities = model.predict(padded_sequence)
     predicted_label_index = np.argmax(predicted_probabilities)
     predicted_label = label_encoder.classes_[predicted_label_index] if label_encoder else predicted_label_index
-    return predicted_label, int(predicted_probabilities.max()*100)
+    return predicted_label, str(int(predicted_probabilities.max()*100))
 
 @app.route('/', methods=['POST'])
 def handle_input():
