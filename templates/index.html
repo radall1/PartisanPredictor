@@ -77,6 +77,7 @@
         function addResponse(text) {
             var outputDiv = document.getElementById("output");
             outputDiv.innerHTML += "<div class='response'>" + text + "</div>";
+            outputDiv.innerHTML += "<div class='userInput'>&gt; </div>";
             outputDiv.scrollTop = outputDiv.scrollHeight;
         }
     </script>
