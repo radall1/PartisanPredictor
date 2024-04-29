@@ -33,7 +33,7 @@ def handle_input():
     user_input = request.json.get('input', '')
     label, percent = predict(user_input)
     label = 'Democrat' if label == 'D' else 'Republican'
-    output = "You are a " + label + " - " + percent + "% confident."
+    output = "You are a " + label + " - " + percent + "% confident.\n"
     return jsonify({'output': output})
     
 @app.route('/')
