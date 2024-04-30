@@ -1,9 +1,11 @@
-# README
+# PartisanPredictor
 
-This is the [Flask](http://flask.pocoo.org/) [quick start](http://flask.pocoo.org/docs/1.0/quickstart/#a-minimal-application) example for [Render](https://render.com).
+Nominees for the Supreme Court of the United States (SCOTUS) must undergo a nomination hearing in the Congress before their appointment is approved or rejected. In this project, we attempt to build a neural network that would predict a person’s political affiliation based on the question they would ask to a SCOTUS candidate.
 
-The app in this repo is deployed at [https://flask.onrender.com](https://flask.onrender.com).
+## Try It Out Yourself
 
-## Deployment
+You can try testing the model yourself by asking it questions [here](https://guess-me-llzu.onrender.com/).
 
-Follow the guide at https://render.com/docs/deploy-flask.
+## Blog Post
+
+You can also read the accompanying blog post documenting the project [here](https://partisanpredictor.wordpress.com/).
