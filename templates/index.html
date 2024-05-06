@@ -12,7 +12,7 @@
             font-family: monospace;
             padding: 20px;
         }
-        .terminal {
+        .chat-container {
             background-color: black;
             color: lightgreen;
             padding: 10px;
@@ -21,12 +21,12 @@
             margin: 20px auto;
             max-width: 600px;
         }
-        .prompt {
+        .chat {
+            color: lightgreen;
+        }
+        .user-input {
             color: lightgreen;
             margin-bottom: 10px;
-        }
-        .output {
-            color: lightgreen;
         }
         input {
             background-color: black;
@@ -39,10 +39,10 @@
     </style>
 </head>
 <body>
-    <div class="terminal" id="terminal">
-        <div class="output">I am a Supreme Court nominee. Ask me a question and I'll tell you if you're a Democrat or a Republican.</div>
-        <div class="output" id="output"></div>
-        <div class="prompt">&gt; <input type="text" id="inputField" onkeydown="handleInput(event)" autofocus></div>
+    <div class="chat-container" id="chat-container">
+        <div class="chat">I am a Supreme Court nominee. Ask me a question and I'll tell you if you're a Democrat or a Republican.</div>
+        <div class="chat" id="chat"></div>
+        <div class="user-input">&gt; <input type="text" id="inputField" onkeydown="handleInput(event)" autofocus></div>
     </div>
 
     <script>
@@ -69,16 +69,16 @@
         }
 
         function addLine(text) {
-            var outputDiv = document.getElementById("output");
-            outputDiv.innerHTML += "<div class='userInput'>" + text + "</div>";
-            outputDiv.scrollTop = outputDiv.scrollHeight;
+            var chatDiv = document.getElementById("chat");
+            chatDiv.innerHTML += "<div class='user-input'>" + text + "</div>";
+            chatDiv.scrollTop = chatDiv.scrollHeight;
         }
 
         function addResponse(text) {
-            var outputDiv = document.getElementById("output");
-            outputDiv.innerHTML += "<div class='response'>" + text + "</div>";
-            outputDiv.innerHTML += "<div class='userInput'>&gt; </div>";
-            outputDiv.scrollTop = outputDiv.scrollHeight;
+            var chatDiv = document.getElementById("chat");
+            chatDiv.innerHTML += "<div class='chat'>" + text + "</div>";
+            chatDiv.innerHTML += "<div class='user-input'>&gt; </div>";
+            chatDiv.scrollTop = chatDiv.scrollHeight;
         }
     </script>
 </body>
